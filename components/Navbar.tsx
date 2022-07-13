@@ -9,7 +9,7 @@ import { IoMdAdd } from "react-icons/io";
 import Router from "next/router";
 
 import Logo from "../utils/tiktik-logo.png";
-import { createOrGetUser } from "../utils";
+import { createOrGetUser, SITE_NAME } from "../utils";
 
 import useAuthStore from "../store/authStore";
 
@@ -31,7 +31,7 @@ const Navbar = () => {
           <Image
             className="cursor-pointer"
             src={Logo}
-            alt="TikTik"
+            alt={SITE_NAME}
             layout="responsive"
           />
         </div>

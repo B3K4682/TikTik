@@ -6,10 +6,11 @@ import { GoVerified } from "react-icons/go";
 import VideoCard from "../../components/VideoCard";
 import NoResults from "../../components/NoResults";
 import { IUser, Video } from "../../types";
-import { BASE_URL } from "../../utils";
+import { BASE_URL, SITE_NAME } from "../../utils";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import useAuthStore from "../../store/authStore";
+import Head from "next/head";
 
 const Search = ({ videos }: { videos: Video[] }) => {
   const [isAccounts, setIsAccounts] = useState(false);
@@ -24,6 +25,9 @@ const Search = ({ videos }: { videos: Video[] }) => {
   );
   return (
     <div className="w-full">
+      <Head>
+        <title>{searchTerm} - {SITE_NAME}</title>
+      </Head>
       <div className="flex gap-10 mb-10 mt-10 border-b-2 border-gray-200 bg-white w-full">
         <p
           className={`text-xl font-semibold cursor-pointer mt-2 ${accounts}`}

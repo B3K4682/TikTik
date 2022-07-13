@@ -9,7 +9,8 @@ import useAuthStore from "../store/authStore";
 import { client } from "../utils/client";
 
 import { topics } from "../utils/constants";
-import { BASE_URL } from "../utils";
+import { BASE_URL, SITE_NAME } from "../utils";
+import Head from "next/head";
 
 const Upload = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -74,6 +75,9 @@ const Upload = () => {
 
   return (
     <div className="flex w-full h-full absolute left-0 top-[60px] mb-10 pt-10 lg:pt-20 bg-[#F8F8F8] justify-center">
+      <Head>
+        <title>Upload - {SITE_NAME}</title>
+      </Head>
       <div className="bg-white rounded-lg xl:h-[80vh] flex gap-6 flex-wrap justify-between items-center p-14 pt-6 lg:w-[60%] ">
         <div>
           <div>

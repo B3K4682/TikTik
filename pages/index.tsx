@@ -3,17 +3,21 @@ import axios from "axios";
 import { Video } from "../types";
 import NoResults from "../components/NoResults";
 import VideoCard from "../components/VideoCard";
-import { BASE_URL } from "../utils";
+import { BASE_URL, SITE_NAME } from "../utils";
+import Head from "next/head";
 
 interface IProps {
   videos: Video[];
 }
 
 const Home = ({ videos }: IProps) => {
-  console.log(videos);
+  const appName = process.env.NEXT_PUBLIC_GOOGLE_API_TOKEN
 
   return (
     <div className="flex flex-col gap-10 videos h-full">
+      <Head>
+        <title>Home - {SITE_NAME}</title>
+      </Head>
       {videos.length ? (
         videos.map((video: Video) => <VideoCard post={video} key={video._id} />)
       ) : (

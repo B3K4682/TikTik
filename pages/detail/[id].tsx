@@ -7,11 +7,12 @@ import { MdOutlineCancel } from "react-icons/md";
 import { BsFillPlayFill } from "react-icons/bs";
 import { HiVolumeUp, HiVolumeOff } from "react-icons/hi";
 import axios from "axios";
-import { BASE_URL } from "../../utils";
+import { BASE_URL, SITE_NAME } from "../../utils";
 import { Video } from "../../types";
 import useAutStore from "../../store/authStore";
 import LikeButton from "../../components/LikeButton";
 import Comments from "../../components/Comments";
+import Head from "next/head";
 
 interface IProps {
   postDetails: Video;
@@ -76,6 +77,11 @@ const Detail = ({ postDetails }: IProps) => {
 
   return (
     <div className="flex w-full absolute left-0 top-0 bg-white flex-wrap lg:flex-nowrap">
+      <Head>
+        <title>
+          {post.caption} - {SITE_NAME}
+        </title>
+      </Head>
       <div className="relative flex-w w-[1000px] lg:w-9/12 flex justify-center items-center bg-blurred-img bg-no-repeat bg-cover bg-center">
         <div className="absolute top-6 left-2 lg:left-6 flex gap-6 z-50">
           <p className="cursor-pointer" onClick={() => router.back()}>
@@ -117,7 +123,7 @@ const Detail = ({ postDetails }: IProps) => {
         <div className="lg:mt-20 mt-10">
           <div className="flex gap-3 p-2 cursor-pointer font-semibold rounded">
             <div className="ml-4 md:w-20 md:h-20 w-16 h-16">
-              <Link href="/">
+              <Link href={`/profile/${post.postedBy._id}`}>
                 <>
                   <Image
                     width={62}
@@ -131,7 +137,7 @@ const Detail = ({ postDetails }: IProps) => {
               </Link>
             </div>
             <div>
-              <Link href="/">
+              <Link href={`/profile/${post.postedBy._id}`}>
                 <div className="mt-3 flex flex-col gap-2">
                   <p className="flex gap-2 items-center md:text-md font-bold text-primary">
                     {post.postedBy.userName} {` `}
