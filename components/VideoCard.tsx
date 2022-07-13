@@ -57,7 +57,7 @@ const VideoCard: NextPage<IProps> = ({ post }) => {
               <div className="flex items-center gap-2">
                 <p className="flex gap-2 items-center md:text-md font-bold text-primary">
                   {post.postedBy.userName} {` `}
-                  <GoVerified className="text-blue-400 text-md" />
+                  {post.postedBy.isVerified && <GoVerified className="text-blue-400" />}
                 </p>
                 <p className="capitalize font-medium text-xs text-gray-500 hidden md:block">
                   {post.postedBy.userName}

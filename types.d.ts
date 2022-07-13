@@ -11,6 +11,7 @@ export interface Video {
     _id: string;
     userName: string;
     image: string;
+    isVerified: boolean;
   };
   likes: {
     postedBy: {
@@ -24,6 +25,7 @@ export interface Video {
     _key: string;
     postedBy: {
       _ref: string;
+      _id: string;
     };
   }[];
   userId: string;
@@ -34,4 +36,5 @@ export interface IUser {
   _type: string;
   userName: string;
   image: string;
+  isVerified: boolean;
 }

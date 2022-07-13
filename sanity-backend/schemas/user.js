@@ -13,5 +13,10 @@ export default {
       title: "Image",
       type: "string",
     },
+    {
+      name: "isVerified",
+      title: "Is Verified",
+      type: "boolean",
+    }
   ],
 };

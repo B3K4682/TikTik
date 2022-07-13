@@ -56,7 +56,9 @@ const Comments = ({
                           <div className="block">
                             <p className="flex gap-1 items-center text-md font-bold text-primary lowercase">
                               {user.userName.replaceAll(" ", "")}
-                              <GoVerified className="text-blue-400" />
+                              {user.isVerified && (
+                                <GoVerified className="text-blue-400" />
+                              )}
                             </p>
                             <p className="capitalize text-gray-400 text-xs">
                               {user.userName}
@@ -65,9 +67,7 @@ const Comments = ({
                         </div>
                       </Link>
                       <div>
-                        <p>
-                          {item.comment}
-                        </p>
+                        <p>{item.comment}</p>
                       </div>
                     </div>
                   )

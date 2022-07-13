@@ -23,7 +23,7 @@ const Detail = ({ postDetails }: IProps) => {
   const [isMuted, setIsMuted] = useState(false);
   const router = useRouter();
   const { userProfile }: any = useAutStore();
-  const [comment, setComment] = useState('')
+  const [comment, setComment] = useState("");
   const [isPostingComment, setIsPostingComment] = useState(false);
 
   const onVideoClick = () => {
@@ -46,7 +46,7 @@ const Detail = ({ postDetails }: IProps) => {
 
   const handleLike = async (like: boolean) => {
     if (userProfile) {
-      const {data} = await axios.put(`${BASE_URL}/api/like`, {
+      const { data } = await axios.put(`${BASE_URL}/api/like`, {
         userId: userProfile._id,
         postId: post._id,
         like,
@@ -56,22 +56,21 @@ const Detail = ({ postDetails }: IProps) => {
     }
   };
 
-  const addComment = async (e) => {
+  const addComment = async (e: any) => {
     e.preventDefault();
 
-    if(userProfile && comment){
+    if (userProfile && comment) {
       setIsPostingComment(true);
 
       const { data } = await axios.put(`${BASE_URL}/api/post/${post._id}`, {
         userId: userProfile._id,
-        comment
+        comment,
       });
-      setPost({ ...post, comments: data.comments })
-      setComment('')
-      setIsPostingComment(false)
+      setPost({ ...post, comments: data.comments });
+      setComment("");
+      setIsPostingComment(false);
     }
-    
-  }
+  };
 
   if (!post) return null;
 
@@ -136,7 +135,9 @@ const Detail = ({ postDetails }: IProps) => {
                 <div className="mt-3 flex flex-col gap-2">
                   <p className="flex gap-2 items-center md:text-md font-bold text-primary">
                     {post.postedBy.userName} {` `}
-                    <GoVerified className="text-blue-400 text-md" />
+                    {post.postedBy.isVerified && (
+                      <GoVerified className="text-blue-400" />
+                    )}
                   </p>
                   <p className="capitalize font-medium text-xs text-gray-500 hidden md:block">
                     {post.postedBy.userName}
@@ -155,7 +156,7 @@ const Detail = ({ postDetails }: IProps) => {
               />
             )}
           </div>
-          <Comments 
+          <Comments
             comment={comment}
             setComment={setComment}
             addComment={addComment}
