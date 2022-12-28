@@ -13,6 +13,7 @@ import useAutStore from "../../store/authStore";
 import LikeButton from "../../components/LikeButton";
 import Comments from "../../components/Comments";
 import Head from "next/head";
+import DeleteButton from "../../components/DeleteButton";
 
 interface IProps {
   postDetails: Video;
@@ -55,6 +56,11 @@ const Detail = ({ postDetails }: IProps) => {
 
       setPost({ ...post, likes: data.likes });
     }
+  };
+
+  const handleDelete = async () => {
+    await axios.delete(`${BASE_URL}/api/post/${post._id}`);
+    router.push("/");
   };
 
   const addComment = async (e: any) => {
@@ -155,11 +161,16 @@ const Detail = ({ postDetails }: IProps) => {
           <p className="px-10 text-lg text-gray-600">{post.caption}</p>
           <div className="mt-10 px-10">
             {userProfile && (
-              <LikeButton
-                likes={post.likes}
-                handleLike={() => handleLike(true)}
-                handleDislike={() => handleLike(false)}
-              />
+              <div className="flex items-center gap-3">
+                <LikeButton
+                  likes={post.likes}
+                  handleLike={() => handleLike(true)}
+                  handleDislike={() => handleLike(false)}
+                />
+                {userProfile._id === post.postedBy._id && (
+                  <DeleteButton handleDelete={handleDelete} />
+                )}
+              </div>
             )}
           </div>
           <Comments

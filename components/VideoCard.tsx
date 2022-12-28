@@ -4,7 +4,7 @@ import { NextPage } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { HiVolumeUp, HiVolumeOff } from "react-icons/hi";
-import { BsPlay, BsFillPlayFill, BsFillPauseFill } from "react-icons/bs";
+import { BsFillPlayFill, BsFillPauseFill } from "react-icons/bs";
 import { GoVerified } from "react-icons/go";
 
 interface IProps {
@@ -12,27 +12,26 @@ interface IProps {
 }
 
 const VideoCard: NextPage<IProps> = ({ post }) => {
-    const [isHover, setIsHover] = useState(false)
-    const [isPlaying, setIsPlaying] = useState(false)
-    const [isMuted, setIsMuted] = useState(false)
-    const videoRef = useRef<HTMLVideoElement>(null);
+  const [isHover, setIsHover] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
-    const onVideoPress = () => {
-        if(isPlaying) {
-            videoRef?.current?.pause();
-            setIsPlaying(false);
-        }
-        else {
-            videoRef?.current?.play();
-            setIsPlaying(true);
-        }
+  const onVideoPress = () => {
+    if (isPlaying) {
+      videoRef?.current?.pause();
+      setIsPlaying(false);
+    } else {
+      videoRef?.current?.play();
+      setIsPlaying(true);
     }
+  };
 
-    useEffect(() => {
-      if(videoRef?.current) {
-        videoRef.current.muted = isMuted;
-      }
-    }, [isMuted]);
+  useEffect(() => {
+    if (videoRef?.current) {
+      videoRef.current.muted = isMuted;
+    }
+  }, [isMuted]);
 
   return (
     <div className="flex flex-col border-b-2 border-gray-200 pb-6">
@@ -57,7 +56,9 @@ const VideoCard: NextPage<IProps> = ({ post }) => {
               <div className="flex items-center gap-2">
                 <p className="flex gap-2 items-center md:text-md font-bold text-primary">
                   {post.postedBy.userName} {` `}
-                  {post.postedBy.isVerified && <GoVerified className="text-blue-400" />}
+                  {post.postedBy.isVerified && (
+                    <GoVerified className="text-blue-400" />
+                  )}
                 </p>
                 <p className="capitalize font-medium text-xs text-gray-500 hidden md:block">
                   {post.postedBy.userName}
